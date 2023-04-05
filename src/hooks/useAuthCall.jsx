@@ -15,13 +15,13 @@ const useAuthCall = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const BASE_URL = ""
+  const BASE_URL = "https://32226.fullstack.clarusway.com/"
 
   const login = async (userInfo) => {
     dispatch(fetchStart())
     try {
       const { data } = await axios.post(
-        ``,
+        `${BASE_URL}users/auth/login/`,
         userInfo
       )
       dispatch(loginSuccess(data))

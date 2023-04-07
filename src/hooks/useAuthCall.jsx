@@ -26,7 +26,7 @@ const useAuthCall = () => {
       )
       dispatch(loginSuccess(data))
       toastSuccessNotify("Login performed")
-      navigate("/home")
+      navigate("/")
       console.log(data)
     } catch (error) {
       dispatch(fetchFail())

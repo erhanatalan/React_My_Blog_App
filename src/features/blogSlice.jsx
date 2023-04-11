@@ -4,22 +4,18 @@ const blogSlice = createSlice({
   name: "blog",
 
   initialState: {
-    currentUser: null,
+    blogs: [],
     loading: false,
     error: false,
-    isAdmin: false,
-    token: null,
   },
   reducers: {
     fetchStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-    loginSuccess: (state, { payload }) => {
+    blogSuccess: (state, { payload }) => {
       state.loading = false;
-      state.currentUser = payload?.user?.username;
-      state.isAdmin = payload?.user?.is_superuser;
-      state.token = payload?.key;
+      state.blogs = payload;
     },
     fetchFail: (state) => {
       state.loading = false;
@@ -30,9 +26,7 @@ const blogSlice = createSlice({
 
 export const {
   fetchStart,
-  loginSuccess,
-  logoutSuccess,
-  registerSuccess,
+  blogSuccess,
   fetchFail,
 } = blogSlice.actions;
 export default blogSlice.reducer;

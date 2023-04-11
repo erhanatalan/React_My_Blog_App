@@ -13,7 +13,6 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -26,7 +25,8 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const Cards = () => {
+const Cards = ({item}) => {
+  console.log(item);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -34,21 +34,21 @@ const Cards = () => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 270, margin:"30px" }}>
         
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            Y
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
+        title="yazarın ısmı"
+        // subheader="September 14, 2016"
       />
       <CardMedia
         component="img"

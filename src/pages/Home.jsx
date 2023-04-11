@@ -8,15 +8,13 @@ const Home = () => {
   const { getBlogs } = useBlogCall()
   useEffect(() => {
     getBlogs()
-  }, [])
+  },[])
   const {blogs} = useSelector((state)=> state.blogs)
   console.log(blogs);
   return (
-    <div>
-      {blogs.map((item, index)=>(<Cards key={index} item={item}/>)
-      )}
-      
-    </div>
+    <>
+      {blogs.map((item, index)=>(<Cards key={index} item={item}/>))}
+    </>
   )
 }
 

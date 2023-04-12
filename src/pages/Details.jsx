@@ -17,10 +17,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
-const Detail = ({ item }) => {
+const Detail = ({item}) => {
     const { getDetail } = useBlogCall();
   useEffect(() => {
-    getDetail(item.id);
+    getDetail(`${item.id}`);
   }, []);
   const { detailx } = useSelector((state) => state.blogs);
   console.log(detailx);

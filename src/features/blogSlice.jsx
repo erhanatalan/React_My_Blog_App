@@ -19,9 +19,9 @@ const blogSlice = createSlice({
       state.loading = false;
       state.blogs = payload;
     },
-    detailGet:(state, { payload }) => {
+    detailGet:(state, { data, id }) => {
       state.loading = false;
-      state.detailx = payload;
+      state[id] = data;
     },
     postLike:(state, {payload})=>{
       state.loading = false;

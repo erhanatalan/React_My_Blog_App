@@ -1,52 +1,64 @@
-import axios from "axios"
+import axios from "axios";
 import {
   fetchFail,
   fetchStart,
   blogSuccess,
   postLike,
-} from "../features/blogSlice"
+  detailGet,
+} from "../features/blogSlice";
 
-import { useDispatch } from "react-redux"
-import useAxios from "./useAxios"
+import { useDispatch } from "react-redux";
+import useAxios from "./useAxios";
 // import { useNavigate } from "react-router-dom"
 // import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
 
 const useBlogCall = () => {
-  const dispatch = useDispatch()
-//   const navigate = useNavigate()
-  const { axiosWithToken } = useAxios()
-  const BASE_URL = "https://32226.fullstack.clarusway.com/"
+  const dispatch = useDispatch();
+  //   const navigate = useNavigate()
+  const { axiosWithToken } = useAxios();
+  const BASE_URL = "https://32226.fullstack.clarusway.com/";
 
   const getBlogs = async () => {
-    dispatch(fetchStart())
+    dispatch(fetchStart());
     try {
-      const { data } = await axios.get(
-        `${BASE_URL}api/blogs/`
-      )
-      dispatch(blogSuccess(data))
+      const { data } = await axios.get(`${BASE_URL}api/blogs/`);
+      dispatch(blogSuccess(data));
       // console.log(data)
     } catch (error) {
-      dispatch(fetchFail())
-      console.log(error)
-    //   toastErrorNotify("error!!!")
+      dispatch(fetchFail());
+      console.log(error);
+      //   toastErrorNotify("error!!!")
     }
-  }
+  };
   const postLikes = async (id) => {
-    dispatch(fetchStart())
+    dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken.post(
-        `${BASE_URL}api/likes/${id}/`)
-      dispatch(postLike(data, id))
-      getBlogs()
+      const { data } = await axiosWithToken.post(`${BASE_URL}api/likes/${id}/`);
+      dispatch(postLike(data, id));
+      getBlogs();
       // console.log(data)
     } catch (error) {
-      dispatch(fetchFail())
-      console.log(error)
-    //   toastErrorNotify("error!!!")
+      dispatch(fetchFail());
+      console.log(error);
+      //   toastErrorNotify("error!!!")
+    }}
+    const getDetail = async (id) => {
+      dispatch(fetchStart());
+      try {
+        const { data } = await axiosWithToken.get(
+          `${BASE_URL}api/blogs/${id}/`
+        );
+
+        dispatch(detailGet(data, id))
+        // getBlogs()
+        // console.log(data)
+      } catch (error) {
+        dispatch(fetchFail());
+        console.log(error);
+        //   toastErrorNotify("error!!!")
+      }
     }
-  }
+    return { getBlogs, postLikes, getDetail };
+};
 
-  return { getBlogs, postLikes}
-}
-
-export default useBlogCall
+export default useBlogCall;

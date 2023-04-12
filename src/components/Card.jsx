@@ -23,7 +23,11 @@ const Cards = ({ item }) => {
   console.log(currentUser);
   console.log(item);
 
-
+  const handleDetail = ()=>{
+    currentUser ? (
+     navigate(`/detail/${item.id}/`)
+    ) : navigate("/login")
+  }
   const handleFav = ()=>{
     currentUser ? (
       postLikes(item.id)
@@ -82,7 +86,9 @@ const Cards = ({ item }) => {
                 </IconButton>
               </CardActions>
             </Box>
-            <Button sx={{border:"1px solid red",backgroundColor:"red", color:"black",width:"120px", height:"30px", marginRight:"5px", fontSize:"12px"}}>Read More</Button>
+            <Button sx={{border:"1px solid red",backgroundColor:"red", color:"black",width:"120px", height:"30px", marginRight:"5px", fontSize:"12px"}}
+            onClick={handleDetail}
+            >Read More</Button>
           </Box>
         </Card>
       // </Grid>

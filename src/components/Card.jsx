@@ -19,13 +19,17 @@ import { useSelector } from "react-redux";
 const Cards = ({ item }) => {
   const { postLikes} = useBlogCall();
   const navigate = useNavigate()
-  const { currentUser } = useSelector((state) => state.currentUser);
-  
+  const { currentUser } = useSelector((state) => state.auth);
+  console.log(currentUser);
+  console.log(item);
+
+
   const handleFav = ()=>{
     currentUser ? (
-      postLikes()
+      postLikes(item.id)
     ) : navigate("/login")
   }
+
   let date = String(new Date(`${item.publish_date}`))
     .split("GMT+0300 (GMT+03:00)")
     .join("")

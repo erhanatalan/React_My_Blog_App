@@ -7,13 +7,14 @@ import {
 } from "../features/blogSlice"
 
 import { useDispatch } from "react-redux"
+import useAxios from "./useAxios"
 // import { useNavigate } from "react-router-dom"
 // import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
 
 const useBlogCall = () => {
   const dispatch = useDispatch()
 //   const navigate = useNavigate()
-
+  const { axiosWithToken } = useAxios()
   const BASE_URL = "https://32226.fullstack.clarusway.com/"
 
   const getBlogs = async () => {
@@ -33,10 +34,10 @@ const useBlogCall = () => {
   const postLikes = async (id) => {
     dispatch(fetchStart())
     try {
-      const { data } = await axios.post(
-        `${BASE_URL}api/likes/${id}/`, id
-      )
-      dispatch(postLike(data))
+      const { data } = await axiosWithToken.post(
+        `${BASE_URL}api/likes/${id}/`)
+      dispatch(postLike(data, id))
+      getBlogs()
       // console.log(data)
     } catch (error) {
       dispatch(fetchFail())

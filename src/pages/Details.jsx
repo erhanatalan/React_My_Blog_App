@@ -17,27 +17,27 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
-const Detail = ({item}) => {
-  console.log(item);
+const Details = () => {
+  // console.log(item);
   const { postLikes } = useBlogCall();
   const navigate = useNavigate();
+  const { id } = useParams();
+  console.log(id);
+  const { getDetail } = useBlogCall();
+  const { details } = useSelector((state) => state.blog);
   const { currentUser } = useSelector((state) => state.auth);
   // console.log(currentUser);
-  const { getSuccessDetails,getDetail } = useBlogCall();
-  const { details } = useSelector((state) => state.blog);
-
-  const { id } = useParams();
 
   useEffect(() => {
     getDetail(id);
   }, []);
-  console.log(details);
 
+  console.log(details);
   const handleFav = () => {
-    currentUser ? postLikes(item.id) : navigate("/login");
+    currentUser ? postLikes(id) : navigate("/login");
   };
 
-  let date = String(new Date(`${item.publish_date}`))
+  let date = String(new Date(`${details.publish_date}`))
     .split("GMT+0300 (GMT+03:00)")
     .join("")
     .split(" ")
@@ -49,25 +49,25 @@ const Detail = ({item}) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {item.author[0].toUpperCase()}
+            {details.author[0].toUpperCase()}
           </Avatar>
         }
-        title={item.author}
+        title={details.author}
         subheader={date}
       />
       <CardMedia
         component="img"
         height="194"
         sx={{ objectFit: "fill" }}
-        image={item.image}
+        image={details.image}
         alt="Paella dish"
       />
       <CardContent sx={{ height: "155px", overflow: "hidden" }}>
         <Typography variant="h5" sx={{ textAlign: "center" }}>
-          {item.title}
+          {details.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {item.content}
+          {details.content}
         </Typography>
       </CardContent>
       <Box
@@ -81,15 +81,15 @@ const Detail = ({item}) => {
           <CardActions disableSpacing>
             <IconButton aria-label="add to favorites" onClick={handleFav}>
               <FavoriteIcon />
-              <Typography>{item.likes}</Typography>
+              <Typography>{details.likes}</Typography>
             </IconButton>
             <IconButton aria-label="add to favorites">
               <ChatBubbleOutlineIcon />
-              <Typography>{item.comment_count}</Typography>
+              <Typography>{details.comment_count}</Typography>
             </IconButton>
             <IconButton aria-label="add to favorites">
               <VisibilityIcon />
-              <Typography>{item.post_views}</Typography>
+              <Typography>{details.post_views}</Typography>
             </IconButton>
           </CardActions>
         </Box>
@@ -111,4 +111,4 @@ const Detail = ({item}) => {
   );
 };
 
-export default Detail;
+export default Details;

@@ -20,8 +20,8 @@ const Cards = ({ item }) => {
   const { postLikes} = useBlogCall();
   const navigate = useNavigate()
   const { currentUser } = useSelector((state) => state.auth);
-  console.log(currentUser);
-  console.log(item);
+  // console.log(currentUser);
+  // console.log(item);
 
   const handleDetail = ()=>{
     currentUser ? (

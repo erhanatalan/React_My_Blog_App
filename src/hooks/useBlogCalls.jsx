@@ -4,7 +4,6 @@ import {
   fetchStart,
   blogSuccess,
   postLike,
-  detailGet,
   getSuccessDetails,
 } from "../features/blogSlice";
 

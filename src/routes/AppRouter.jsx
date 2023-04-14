@@ -5,9 +5,10 @@ import Register from '../pages/Register'
 import Home from '../pages/Home'
 import Navbar from '../components/Navbar'
 import PrivateRouter from './PrivateRouter'
-import Details from '../pages/Details'
+import Detail from '../pages/Details'
 
 const AppRouter = () => {
+
   
   return (
     <BrowserRouter>
@@ -17,7 +18,7 @@ const AppRouter = () => {
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/detail/:id' element={<PrivateRouter/>} >
-              <Route path='' element={<Details />}/>
+              <Route path='' element={<Detail/>}/>
             </Route>
         </Routes>
     </BrowserRouter>

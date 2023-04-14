@@ -13,21 +13,25 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Box, Button } from "@mui/material";
 import useBlogCall from "../hooks/useBlogCalls";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 const Detail = ({item}) => {
-    const { getDetail } = useBlogCall();
-  useEffect(() => {
-    getDetail(`${item.id}`);
-  }, []);
-  const { detailx } = useSelector((state) => state.blogs);
-  console.log(detailx);
+  console.log(item);
   const { postLikes } = useBlogCall();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.auth);
-  console.log(currentUser);
+  // console.log(currentUser);
+  const { getSuccessDetails,getDetail } = useBlogCall();
+  const { details } = useSelector((state) => state.blog);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    getDetail(id);
+  }, []);
+  console.log(details);
 
   const handleFav = () => {
     currentUser ? postLikes(item.id) : navigate("/login");

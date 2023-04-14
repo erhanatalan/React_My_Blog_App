@@ -5,6 +5,7 @@ import {
   blogSuccess,
   postLike,
   detailGet,
+  getSuccessDetails,
 } from "../features/blogSlice";
 
 import { useDispatch } from "react-redux";
@@ -49,7 +50,7 @@ const useBlogCall = () => {
           `${BASE_URL}api/blogs/${id}/`
         );
 
-        dispatch(detailGet(data, id))
+        dispatch(getSuccessDetails({data}))
         // getBlogs()
         // console.log(data)
       } catch (error) {

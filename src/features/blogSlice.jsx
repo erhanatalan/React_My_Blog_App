@@ -5,7 +5,7 @@ const blogSlice = createSlice({
 
   initialState: {
     blogs: [],
-    detailx:[],
+    details: [],
     likes: "",
     loading: false,
     error: false,
@@ -19,11 +19,15 @@ const blogSlice = createSlice({
       state.loading = false;
       state.blogs = payload;
     },
-    detailGet:(state, { data, id }) => {
+    detailGet: (state, { payload: { data, id } }) => {
       state.loading = false;
       state[id] = data;
     },
-    postLike:(state, {payload})=>{
+    getSuccessDetails: (state, { payload: { data } }) => {
+      state.loading = false;
+      state.details = data;
+    },
+    postLike: (state, { payload }) => {
       state.loading = false;
       state.likes = payload;
     },
@@ -40,5 +44,6 @@ export const {
   fetchFail,
   postLike,
   detailGet,
+  getSuccessDetails,
 } = blogSlice.actions;
 export default blogSlice.reducer;
